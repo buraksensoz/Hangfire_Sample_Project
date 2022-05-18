@@ -1,0 +1,41 @@
+﻿
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12"><h4>Hangfire Sample Test</h4></div>
+        </div>
+    <div class="row">
+        <div class="col-md-2"><a asp-action="AddSingleWork" class="btn btn-sm btn-success d-block">Add Single Work</a> </div>
+        <div class="col-md-3"><a asp-action="AddScheduleWork" class="btn btn-sm btn-success d-block">Add Schedule Work(10 sec)</a> </div>
+        <div class="col-md-3"><a asp-action="AddRecurringWork" class="btn btn-sm btn-success d-block">Add Recurring Work(1 min)</a> </div>
+        <div class="col-md-2"><a asp-action="ClearLogs" class="btn btn-sm btn-danger d-block">Clear Logs</a></div>
+        <div class="col-md-2"><a class="btn btn-primary btn-sm d-block" href="/hangfire" target="_blank">Show Dashboard</a></div>
+    </div>
+    <div class="row">
+        <div id="LogList"  class="col-md-12 pt-2">
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    
+    function getlogs() {
+        $.ajax(
+            {
+                url: '@Url.Action("GetLogs", "Home")',
+                processData: false,
+                contentType: false,
+                type: "GET",
+                async: true,
+                success: function(e) {
+                    $('#LogList').html(e);
+                }
+            });
+
+    }
+    getlogs;
+
+    var intervalID = setInterval(getlogs, 1500);
+
+</script>
